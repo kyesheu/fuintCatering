@@ -5,10 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fuint</groupId>
-    <artifactId>fuint</artifactId>
+    <artifactId>fuintBackend</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <description>fuint project root</description>
+
     <modules>
         <module>fuint-utils</module>
         <module>fuint-repository</module>
