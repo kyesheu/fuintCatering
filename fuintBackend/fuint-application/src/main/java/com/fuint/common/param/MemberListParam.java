@@ -58,4 +58,16 @@ public class MemberListParam extends PageParam implements Serializable {
     @ApiModelProperty(value="会员状态", name="status")
     private String status;
 
+    @ApiModelProperty(value="所属店铺ID,逗号隔开", name="storeIds")
+    private String storeIds;
+
+    @ApiModelProperty(value="分组ID,逗号隔开", name="groupIds")
+    private String groupIds;
+
+    @ApiModelProperty(value="开始时间", name="startTime")
+    private String startTime;
+
+    @ApiModelProperty(value="结束时间", name="endTime")
+    private String endTime;
+
 }

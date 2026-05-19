@@ -32,11 +32,11 @@
     </select>
 
     <select id="findByTableId" resultType="com.fuint.repository.model.MtOrder">
-        select * from mt_order o where o.TAKEN_TABLE_ID = #{tableId} and o.STATUS = 'A' and o.PAY_STATUS = 'A' order by ID desc
+        select * from mt_order o where o.TABLE_ID = #{tableId} and o.STATUS = 'A' and o.PAY_STATUS = 'A' order by ID desc
     </select>
 
     <update id="removeTakenTableId">
-        update mt_order o set o.TAKEN_TABLE_ID = 0 where o.TAKEN_TABLE_ID = #{tableId}
+        update mt_order o set o.TABLE_ID = 0 where o.TABLE_ID = #{tableId}
     </update>
 
     <select id="getPayMoney" resultType="java.math.BigDecimal">

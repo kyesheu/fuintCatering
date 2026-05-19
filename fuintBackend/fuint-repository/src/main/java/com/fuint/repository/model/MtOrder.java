@@ -1,14 +1,16 @@
 package com.fuint.repository.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 订单表
@@ -43,6 +45,7 @@ public class MtOrder implements Serializable {
     private String orderSn;
 
     @ApiModelProperty("取单号")
+    @TableField(exist = false)
     private Integer pickupNo;
 
     @ApiModelProperty("卡券ID")
@@ -58,6 +61,7 @@ public class MtOrder implements Serializable {
     private Integer tableId;
 
     @ApiModelProperty("正在占用的桌码ID")
+    @TableField(exist = false)
     private Integer takenTableId;
 
     @ApiModelProperty("就餐人数")

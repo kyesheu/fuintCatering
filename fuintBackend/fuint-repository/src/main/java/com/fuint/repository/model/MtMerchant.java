@@ -1,6 +1,7 @@
 package com.fuint.repository.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -43,6 +44,7 @@ public class MtMerchant implements Serializable {
     private String wxOfficialAppSecret;
 
     @ApiModelProperty(value="结算比例")
+    @TableField(exist = false)
     private BigDecimal settleRate;
 
     @ApiModelProperty("商户号")

@@ -1,6 +1,7 @@
 package com.fuint.repository.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -46,6 +47,7 @@ public class MtGoods implements Serializable {
     private String goodsNo;
 
     @ApiModelProperty("可用平台，0：不限，1：仅会员端（小程序和h5）；2：仅收银端")
+    @TableField(exist = false)
     private Integer platform;
 
     @ApiModelProperty("是否单规格")

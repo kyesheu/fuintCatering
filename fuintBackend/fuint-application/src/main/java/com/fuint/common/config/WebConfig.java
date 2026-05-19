@@ -6,6 +6,7 @@ import com.fuint.common.web.CommandInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -27,9 +28,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Swagger 资源映射必须放在 /** 之前
+        // Swagger 资源映射
         registry.addResourceHandler("swagger-ui.html").addResourceLocations(
                 "classpath:/META-INF/resources/");
+        registry.addResourceHandler("/swagger-ui/**").addResourceLocations(
+                "classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
         registry.addResourceHandler("/webjars/**").addResourceLocations(
                 "classpath:/META-INF/resources/webjars/");
 
@@ -115,7 +118,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        // 将 swagger-ui.html 重定向到 swagger-ui/
-        registry.addRedirectViewController("/swagger-ui.html", "/swagger-ui/");
+        registry.addRedirectViewController("/", "/swagger-ui.html");
+        registry.addStatusController("/csrf", HttpStatus.NO_CONTENT);
     }
 }

@@ -96,6 +96,7 @@ public class MtUser implements Serializable {
     private Integer storeId;
 
     @ApiModelProperty("是否员工")
+    @TableField(exist = false)
     private String isStaff;
 
     @ApiModelProperty("创建时间")

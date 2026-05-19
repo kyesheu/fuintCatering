@@ -36,4 +36,7 @@ public class CartSaveParam implements Serializable {
     @ApiModelProperty(value="下单会员ID", name="userId")
     private Integer userId;
 
+    @ApiModelProperty(value="桌码ID", name="tableId")
+    private Integer tableId;
+
 }

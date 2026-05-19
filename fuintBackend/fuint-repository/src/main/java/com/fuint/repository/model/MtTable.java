@@ -1,6 +1,7 @@
 package com.fuint.repository.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import lombok.Data;
 /**
  * 桌码实体
  *
- * @Created by FSQ
+ * Created by FSQ
  * CopyRight https://www.fuint.cn
  */
 @Data
@@ -45,9 +46,11 @@ public class MtTable implements Serializable {
     private String description;
 
     @ApiModelProperty("使用状态")
+    @TableField(exist = false)
     private String useStatus;
 
     @ApiModelProperty("开台时间")
+    @TableField(exist = false)
     private Date useTime;
 
     @ApiModelProperty("创建时间")

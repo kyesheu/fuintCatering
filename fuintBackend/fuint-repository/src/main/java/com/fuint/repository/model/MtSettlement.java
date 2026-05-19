@@ -1,6 +1,7 @@
 package com.fuint.repository.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class MtSettlement implements Serializable {
     private Integer storeId;
 
     @ApiModelProperty("结算比例")
+    @TableField(exist = false)
     private BigDecimal settleRate;
 
     @ApiModelProperty("订单总金额")

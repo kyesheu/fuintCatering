@@ -226,7 +226,7 @@ public class GiveServiceImpl extends ServiceImpl<MtGiveMapper, MtGive> implement
             }
             MtCoupon coupon = couponService.queryCouponById(userCoupon.getCouponId());
             if (coupon.getLimitNum() != null && coupon.getLimitNum() > 0) {
-                Long count = mtUserCouponMapper.selectCount(Wrappers.lambdaQuery(MtUserCoupon.class).eq(MtUserCoupon::getCouponId, coupon.getId()).eq(MtUserCoupon::getUserId, user.getId()));
+                Integer count = mtUserCouponMapper.selectCount(new LambdaQueryWrapper<MtUserCoupon>().eq(MtUserCoupon::getCouponId, coupon.getId()).eq(MtUserCoupon::getUserId, user.getId()));
                 if (count > coupon.getLimitNum()) {
                     throw new BusinessCheckException("受赠对象拥有该卡券数量已达上限");
                 }

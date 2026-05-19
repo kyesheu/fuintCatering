@@ -83,8 +83,8 @@ public class ClientCartController extends BaseController {
     public ResponseObject save(HttpServletRequest request, @RequestBody CartSaveParam saveParam) throws BusinessCheckException {
         UserInfo userInfo = TokenUtil.getUserInfo();
         String merchantNo = request.getHeader("merchantNo") == null ? "" : request.getHeader("merchantNo");
-        Integer storeId = StringUtil.isEmpty(request.getHeader("storeId")) ? 0 : Integer.parseInt(request.getHeader("storeId"));
-        Integer tableId = StringUtil.isEmpty(request.getHeader("tableId")) ? 0 : Integer.parseInt(request.getHeader("tableId"));
+        int storeId = StringUtil.isEmpty(request.getHeader("storeId")) ? 0 : Integer.parseInt(request.getHeader("storeId"));
+        int tableId = StringUtil.isEmpty(request.getHeader("tableId")) ? 0 : Integer.parseInt(request.getHeader("tableId"));
         Integer cartId = saveParam.getCartId() == null ? 0 : saveParam.getCartId();
         Integer goodsId = saveParam.getGoodsId() == null ? 0 : saveParam.getGoodsId();
         Integer skuId = saveParam.getSkuId() == null ? 0 : saveParam.getSkuId();
@@ -100,7 +100,7 @@ public class ClientCartController extends BaseController {
         } else {
             mtUser = memberService.queryMemberById(userInfo.getId());
         }
-        if (tableId <= 0 && tableId1 != null) {
+        if (tableId <= 0) {
             tableId = tableId1;
         }
         if (tableId > 0) {
@@ -169,7 +169,7 @@ public class ClientCartController extends BaseController {
         mtCart.setTableId(tableId);
 
         Integer id = cartService.saveCart(mtCart, action);
-        Map<String, Object> data = new HashMap();
+        Map<String, Object> data = new HashMap<>();
         data.put("cartId", id);
 
         return getSuccessResult(data);
@@ -199,7 +199,7 @@ public class ClientCartController extends BaseController {
         }
 
         if (StringUtil.isEmpty(cartIds)) {
-            if (tableId != null && tableId > 0) {
+            if (tableId > 0) {
                 MtTable mtTable = tableService.queryTableById(tableId);
                 if (mtTable != null) {
                     cartService.removeCartByTableId(mtTable.getId());
@@ -235,11 +235,8 @@ public class ClientCartController extends BaseController {
         String orderMode = params.getOrderMode() == null ? OrderModeEnum.ONESELF.getKey() : params.getOrderMode();
         Integer tableId1 = params.getTableId() == null ? 0 : params.getTableId();
         Integer merchantId = merchantService.getMerchantId(merchantNo);
-        boolean isUsePoint = false;
-        if (point.equals(YesOrNoEnum.TRUE.getKey())) {
-            isUsePoint = true;
-        }
-        if (tableId > 0) {
+        boolean isUsePoint = point.equals(YesOrNoEnum.TRUE.getKey());
+		if (tableId > 0) {
             MtTable mtTable = tableService.queryTableById(tableId);
             if (mtTable != null && mtTable.getStoreId() > 0) {
                 storeId = mtTable.getStoreId();
@@ -287,7 +284,7 @@ public class ClientCartController extends BaseController {
             param.put("merchantId", merchantId);
         }
         param.put("status", StatusEnum.ENABLED.getKey());
-        if (tableId1 != null && tableId1 > 0) {
+        if (tableId1 > 0) {
             param.remove("userId");
             param.put("tableId", tableId1);
         } else {
@@ -317,7 +314,7 @@ public class ClientCartController extends BaseController {
                 skuParam.put("id", skuId);
                 List<MtGoodsSku> skuList = mtGoodsSkuMapper.selectByMap(skuParam);
                 // 该skuId不正常
-                if (skuList.size() < 1) {
+                if (skuList.isEmpty()) {
                     skuId = 0;
                 }
             }
